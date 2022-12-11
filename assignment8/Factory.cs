@@ -77,5 +77,19 @@ namespace assignment8
 
             Console.WriteLine();
         }
+
+        public void PrintPhones()
+        {
+            Console.WriteLine("Smartphones:");
+            foreach (GentleSmartphone smartphone in Smartphones)
+            {
+                Console.WriteLine(
+                    "Serial number: {0},\t Sensitivity: {1}",
+                    smartphone.SerialNumber, smartphone.Sensor
+                    );
+            }
+
+            Console.WriteLine();
+        }
     }
 }
