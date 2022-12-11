@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static assignment8.GentleSmartphone;
 using static assignment8.Customer;
+using static TransformatorType;
 
 namespace assignment8
 {
@@ -30,8 +31,36 @@ namespace assignment8
 
         }
 
-        public static void SaleSmartphone()
+        public void SaleSmartphone()
         {
+            List<GentleSmartphone> selectedSmartphones = new List<GentleSmartphone>();
+            foreach (Customer customer in Customers)
+            {
+                foreach(GentleSmartphone smartphone in Smartphones)
+                {
+                    bool firstCondition = (customer.GentleRate * 1.5) <= smartphone.Sensor.Sensitivity;
+                    bool secondCondition = customer.GentleRate <= (smartphone.Sensor.Sensitivity * 2);
+                    bool firstConditionWithMult = (customer.GentleRate * 1.5) <= (smartphone.Sensor.Sensitivity * 2);
+                    bool secondConditionWithMult = customer.GentleRate <= (smartphone.Sensor.Sensitivity * 2 * 2);
+                    bool firstConditionWithDiv = (customer.GentleRate * 1.5) <= (smartphone.Sensor.Sensitivity / 2);
+                    bool secondConditionWithDiv = customer.GentleRate <= (smartphone.Sensor.Sensitivity * 2 / 2);
+                    if ( firstCondition && secondCondition )
+                    {
+                        customer.Smartphone = smartphone;
+                        selectedSmartphones.Add(smartphone);
+                        break;
+                    }
+                    else if( firstConditionWithMult && secondConditionWithMult)
+                    {
+                        customer.Smartphone = smartphone;
+                        customer.TransformModule = Multiplier;
+                        selectedSmartphones.Add(smartphone);
+                        break;
+                    }
+                }
+            }
+
+            Smartphones = Smartphones.Except(selectedSmartphones).ToList();
 
         }
     }
