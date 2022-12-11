@@ -1,4 +1,4 @@
-﻿public enum TranformatorType
+﻿public enum TransformatorType
 {
     Multiplier,
     Divider

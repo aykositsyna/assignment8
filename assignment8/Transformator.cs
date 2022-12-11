@@ -9,9 +9,12 @@ namespace assignment8
     internal class Transformator
     {
         public int SerialNumber;
-        public TranformatorType TranformType;
+        public TransformatorType TransformType;
 
-        public Transformator()
-        { }
+        public Transformator(int _serialNumber, TransformatorType _transformType)
+        {
+            SerialNumber = _serialNumber;
+            TransformType = _transformType;
+        }
     }
 }
