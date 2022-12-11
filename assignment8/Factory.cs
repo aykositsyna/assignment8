@@ -63,5 +63,19 @@ namespace assignment8
             Smartphones = Smartphones.Except(selectedSmartphones).ToList();
 
         }
+
+        public void PrintCustomers()
+        {
+            Console.WriteLine("Customers:");
+            foreach (Customer customer in Customers)
+            {
+                Console.WriteLine(
+                    "Name: {0},\t Gentle rate: {1},\t Smartphone: {2}",
+                    customer.FullName, customer.GentleRate, customer.Smartphone
+                    );
+            }
+
+            Console.WriteLine();
+        }
     }
 }
