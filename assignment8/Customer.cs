@@ -13,7 +13,12 @@ namespace assignment8
         public GentleSmartphone Smartphone;
         public Transformator TransformModule;
 
-        public Customer()
-        { }
+        public Customer(string name, byte _gentleRate, GentleSmartphone _smartphone, Transformator _transformModule)
+        {
+            FullName = name;
+            GentleRate = _gentleRate;
+            Smartphone = _smartphone;
+            TransformModule = _transformModule;
+        }
     }
 }
