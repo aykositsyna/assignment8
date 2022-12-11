@@ -11,7 +11,10 @@ namespace assignment8
         public int SerialNumber;
         public TacticleSensor Sensor;
 
-        public GentleSmartphone()
-        { }
+        public GentleSmartphone(int _serialNumber, TacticleSensor _sensor)
+        {
+            SerialNumber = _serialNumber;
+            Sensor = _sensor;
+        }
     }
 }
