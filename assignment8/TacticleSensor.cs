@@ -10,8 +10,10 @@ namespace assignment8
     {
         public byte Sensitivity;
 
-        public TacticleSensor()
-        { }
+        public TacticleSensor(byte _sensitivity)
+        { 
+            Sensitivity = _sensitivity;
+        }
 
     }
 }
