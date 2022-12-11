@@ -10,11 +10,23 @@ namespace assignment8
 {
     internal class Factory
     {
-        public List<GentleSmartphone> Smartphones { get; set; }
-        public List<Customer> Customers { get; set; }
+        public List<GentleSmartphone> Smartphones;
+        public List<Customer> Customers;
 
-        public Factory()
+        public Factory( List<Customer> customers)
         {
+            Random random = new Random();
+            Smartphones = new List<GentleSmartphone>();
+            for (int i = 0; i < 10; i++)
+            {
+                int sensitivityInt = random.Next(50, 200);
+                byte sensitivity = Convert.ToByte(sensitivityInt);
+                int serialNumber = random.Next(100000, 999999);
+                Smartphones[i] = new GentleSmartphone(serialNumber, sensitivity);
+            }
+
+            Customers = customers;
+
 
         }
 
