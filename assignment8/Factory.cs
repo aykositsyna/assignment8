@@ -57,6 +57,13 @@ namespace assignment8
                         selectedSmartphones.Add(smartphone);
                         break;
                     }
+                    else if ( firstConditionWithDiv && secondConditionWithDiv )
+                    {
+                        customer.Smartphone = smartphone;
+                        customer.TransformModule = Divider;
+                        selectedSmartphones.Add(smartphone);
+                        break;
+                    }
                 }
             }
 
@@ -91,5 +98,20 @@ namespace assignment8
 
             Console.WriteLine();
         }
+
+        public void PrintSelectedPhones()
+        {
+            Console.WriteLine("Selected smartphones:");
+            foreach (GentleSmartphone selectedSmartphone in selectedSmartphones)
+            {
+                Console.WriteLine(
+                    "Serial number: {0},\t Sensitivity: {1}",
+                    smartphone.SerialNumber, smartphone.Sensor
+                    );
+            }
+
+            Console.WriteLine();
+        }
+
     }
 }
