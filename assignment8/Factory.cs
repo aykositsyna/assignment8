@@ -91,15 +91,19 @@ namespace assignment8
             return false;
         }
 
-        public void PrintCustomers()
+        public void PrintCustomers(bool printSmartphones)
         {
             Console.WriteLine("Customers:");
             foreach (Customer customer in Customers)
             {
-                Console.WriteLine(
-                    "Name: {0},\t Gentle rate: {1},\t Smartphone: {2}",
-                    customer.FullName, customer.GentleRate, customer.Smartphone
+                Console.Write(
+                    "Name: {0},\t Gentle rate: {1},\t ",
+                    customer.FullName, customer.GentleRate
                     );
+                if (printSmartphones)
+                {
+                    Console.WriteLine("Smartphone: {0}", customer.Smartphone);
+                }
             }
 
             Console.WriteLine();
@@ -109,20 +113,6 @@ namespace assignment8
         {
             Console.WriteLine("Smartphones:");
             foreach (GentleSmartphone smartphone in Smartphones)
-            {
-                Console.WriteLine(
-                    "Serial number: {0},\t Sensitivity: {1}",
-                    smartphone.SerialNumber, smartphone.Sensor
-                    );
-            }
-
-            Console.WriteLine();
-        }
-
-        public void PrintSelectedPhones()
-        {
-            Console.WriteLine("Selected smartphones:");
-            foreach (GentleSmartphone selectedSmartphone in selectedSmartphones)
             {
                 Console.WriteLine(
                     "Serial number: {0},\t Sensitivity: {1}",
