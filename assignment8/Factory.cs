@@ -36,39 +36,59 @@ namespace assignment8
             List<GentleSmartphone> selectedSmartphones = new List<GentleSmartphone>();
             foreach (Customer customer in Customers)
             {
-                foreach(GentleSmartphone smartphone in Smartphones)
-                {
-                    bool firstCondition = (customer.GentleRate * 1.5) <= smartphone.Sensor.Sensitivity;
-                    bool secondCondition = customer.GentleRate <= (smartphone.Sensor.Sensitivity * 2);
-                    bool firstConditionWithMult = (customer.GentleRate * 1.5) <= (smartphone.Sensor.Sensitivity * 2);
-                    bool secondConditionWithMult = customer.GentleRate <= (smartphone.Sensor.Sensitivity * 2 * 2);
-                    bool firstConditionWithDiv = (customer.GentleRate * 1.5) <= (smartphone.Sensor.Sensitivity / 2);
-                    bool secondConditionWithDiv = customer.GentleRate <= (smartphone.Sensor.Sensitivity * 2 / 2);
-                    if ( firstCondition && secondCondition )
-                    {
-                        customer.Smartphone = smartphone;
-                        selectedSmartphones.Add(smartphone);
-                        break;
-                    }
-                    else if( firstConditionWithMult && secondConditionWithMult)
-                    {
-                        customer.Smartphone = smartphone;
-                        customer.TransformModule = Multiplier;
-                        selectedSmartphones.Add(smartphone);
-                        break;
-                    }
-                    else if ( firstConditionWithDiv && secondConditionWithDiv )
-                    {
-                        customer.Smartphone = smartphone;
-                        customer.TransformModule = Divider;
-                        selectedSmartphones.Add(smartphone);
-                        break;
-                    }
-                }
+                TrySmartphones(customer, selectedSmartphones);
             }
 
             Smartphones = Smartphones.Except(selectedSmartphones).ToList();
 
+        }
+
+        private void TrySmartphones(Customer customer, List<GentleSmartphone> selectedSmartphones)
+        {
+            foreach (GentleSmartphone smartphone in Smartphones)
+            {
+                if (CompareSensitivity(customer, smartphone, selectedSmartphones))
+                    break;
+                else if (CompareSensitivity(customer, smartphone, selectedSmartphones, Multiplier))
+                    break;
+                else if (CompareSensitivity(customer, smartphone, selectedSmartphones, Divider))
+                    break;
+            }
+        }
+
+        private bool CompareSensitivity(
+            Customer customer,
+            GentleSmartphone smartphone,
+            List<GentleSmartphone> selectedSmartphones,
+            TransformatorType? transType = null
+        )
+        {
+            Random random = new Random();
+            double cofficient = 1;
+            if (transType == Multiplier)
+            {
+                cofficient = 2;
+            }
+            if (transType == Divider)
+            {
+                cofficient = 0.5;
+            }
+ 
+            bool firstCondition = (customer.GentleRate * 1.5) <= (smartphone.Sensor.Sensitivity * cofficient);
+            bool secondCondition = customer.GentleRate <= (smartphone.Sensor.Sensitivity * 2 * cofficient);
+
+            if (firstCondition && secondCondition)
+            {
+                if (cofficient != 1)
+                {
+                    int serialNum = random.Next(100, 999);
+                    customer.TransformModule = new Transformator(serialNum, (TransformatorType)transType);
+                }
+                customer.Smartphone = smartphone;
+                selectedSmartphones.Add(smartphone);
+                return true;
+            }
+            return false;
         }
 
         public void PrintCustomers()
