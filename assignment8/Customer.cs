@@ -29,7 +29,7 @@ namespace assignment8
             //get random name from enum Names
             Array values1 = Enum.GetValues(typeof(Names));
             string randomName = ((Names)values1.GetValue(random.Next(values1.Length))).ToString();
-
+            FullName = randomName;
         }
     }
 }

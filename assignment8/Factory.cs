@@ -23,7 +23,7 @@ namespace assignment8
                 int sensitivityInt = random.Next(50, 200);
                 byte sensitivity = Convert.ToByte(sensitivityInt);
                 int serialNumber = random.Next(100000, 999999);
-                Smartphones[i] = new GentleSmartphone(serialNumber, sensitivity);
+                Smartphones.Add(new GentleSmartphone(serialNumber, sensitivity));
             }
 
             Customers = customers;
@@ -45,15 +45,23 @@ namespace assignment8
 
         private void TrySmartphones(Customer customer, List<GentleSmartphone> selectedSmartphones)
         {
-            foreach (GentleSmartphone smartphone in Smartphones)
+            bool findSmartphone = false;
+            //foreach (GentleSmartphone smartphone in Smartphones)
+            Smartphones.RemoveAll(smartphone =>
+            
             {
                 if (CompareSensitivity(customer, smartphone, selectedSmartphones))
-                    break;
+                {
+                    findSmartphone = true;
+                }    
                 else if (CompareSensitivity(customer, smartphone, selectedSmartphones, Multiplier))
                     break;
                 else if (CompareSensitivity(customer, smartphone, selectedSmartphones, Divider))
                     break;
+                return findSmartphone;
             }
+
+            )
         }
 
         private bool CompareSensitivity(
@@ -102,8 +110,9 @@ namespace assignment8
                     );
                 if (printSmartphones)
                 {
-                    Console.WriteLine("Smartphone: {0}", customer.Smartphone);
+                    Console.Write("Smartphone: {0}", customer.Smartphone.SerialNumber);
                 }
+                Console.WriteLine();
             }
 
             Console.WriteLine();
@@ -116,8 +125,8 @@ namespace assignment8
             {
                 Console.WriteLine(
                     "Serial number: {0},\t Sensitivity: {1}",
-                    smartphone.SerialNumber, smartphone.Sensor
-                    );
+                    smartphone.SerialNumber, smartphone.Sensor.Sensitivity
+                );
             }
 
             Console.WriteLine();

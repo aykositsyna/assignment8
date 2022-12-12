@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static assignment8.Customer;
+using static assignment8.Factory;
 
 namespace assignment8
 {
@@ -17,8 +18,14 @@ namespace assignment8
                 customers.Add(new Customer());
             }
 
-        }
+            Factory factory = new Factory(customers);
 
+            factory.PrintPhones();
+            factory.PrintCustomers(false);
+            factory.SaleSmartphone();
+            factory.PrintCustomers(true);
+
+        }
 
     }
 }
