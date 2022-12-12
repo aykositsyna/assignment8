@@ -38,30 +38,49 @@ namespace assignment8
             {
                 TrySmartphones(customer, selectedSmartphones);
             }
-
-            Smartphones = Smartphones.Except(selectedSmartphones).ToList();
-
+            Console.WriteLine();
         }
 
         private void TrySmartphones(Customer customer, List<GentleSmartphone> selectedSmartphones)
         {
-            bool findSmartphone = false;
-            //foreach (GentleSmartphone smartphone in Smartphones)
-            Smartphones.RemoveAll(smartphone =>
-            
+            int smartphoneIndex = Smartphones.FindIndex(smartphone =>
             {
                 if (CompareSensitivity(customer, smartphone, selectedSmartphones))
+                    return true;
+                return false;
+            });
+
+            if (smartphoneIndex < 0)
+            {
+                smartphoneIndex = Smartphones.FindIndex(smartphone =>
                 {
-                    findSmartphone = true;
-                }    
-                else if (CompareSensitivity(customer, smartphone, selectedSmartphones, Multiplier))
-                    break;
-                else if (CompareSensitivity(customer, smartphone, selectedSmartphones, Divider))
-                    break;
-                return findSmartphone;
+                    if (CompareSensitivity(customer, smartphone, selectedSmartphones, Multiplier))
+                      return true;
+                    return false;
+                });
             }
 
-            )
+            if (smartphoneIndex < 0)
+            {
+                smartphoneIndex = Smartphones.FindIndex(smartphone =>
+                {
+                    if (CompareSensitivity(customer, smartphone, selectedSmartphones, Divider))
+                        return true;
+                    return false;
+                });
+            }
+
+            if (smartphoneIndex >= 0)
+            {
+                Console.WriteLine("Select smartphone {0} for customer {1}", Smartphones[smartphoneIndex].SerialNumber, customer.FullName);
+                Smartphones.RemoveAt(smartphoneIndex);
+
+            }
+            else
+            {
+                Console.WriteLine("No smartphones for customer {0}", customer.FullName);
+            }
+
         }
 
         private bool CompareSensitivity(
@@ -110,7 +129,14 @@ namespace assignment8
                     );
                 if (printSmartphones)
                 {
-                    Console.Write("Smartphone: {0}", customer.Smartphone.SerialNumber);
+                    if(customer.Smartphone != null)
+                    {
+                        Console.Write("Smartphone: {0}", customer.Smartphone.SerialNumber);
+                    }
+                    else
+                    {
+                        Console.Write("No smartphone:(");
+                    }
                 }
                 Console.WriteLine();
             }
@@ -132,5 +158,10 @@ namespace assignment8
             Console.WriteLine();
         }
 
+        public void ClearSmartphones()
+        {
+            Smartphones.Clear();
+            Console.WriteLine("Collection of smartphones is cleared");
+        }
     }
 }

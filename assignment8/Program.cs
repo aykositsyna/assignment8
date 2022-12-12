@@ -24,7 +24,8 @@ namespace assignment8
             factory.PrintCustomers(false);
             factory.SaleSmartphone();
             factory.PrintCustomers(true);
-
+            factory.PrintPhones();
+            factory.ClearSmartphones();
         }
 
     }
