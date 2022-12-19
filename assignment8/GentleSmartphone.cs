@@ -11,7 +11,7 @@ namespace assignment8
         public int SerialNumber;
         public TacticleSensor Sensor;
 
-        public GentleSmartphone(int _serialNumber, byte sensorSensitivity)
+        public GentleSmartphone(int _serialNumber,  byte sensorSensitivity)
         {
             SerialNumber = _serialNumber;
             Sensor = new TacticleSensor(sensorSensitivity);

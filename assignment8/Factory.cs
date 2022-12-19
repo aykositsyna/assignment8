@@ -20,7 +20,7 @@ namespace assignment8
             Smartphones = new List<GentleSmartphone>();
             for (int i = 0; i < 10; i++)
             {
-                int sensitivityInt = random.Next(50, 200);
+                int sensitivityInt = random.Next(75, 175);
                 byte sensitivity = Convert.ToByte(sensitivityInt);
                 int serialNumber = random.Next(100000, 999999);
                 Smartphones.Add(new GentleSmartphone(serialNumber, sensitivity));
@@ -101,7 +101,7 @@ namespace assignment8
                 cofficient = 0.5;
             }
  
-            bool firstCondition = (customer.GentleRate * 1.5) <= (smartphone.Sensor.Sensitivity * cofficient);
+            bool firstCondition = (customer.GentleRate * 1.5) >= (smartphone.Sensor.Sensitivity * cofficient);
             bool secondCondition = customer.GentleRate <= (smartphone.Sensor.Sensitivity * 2 * cofficient);
 
             if (firstCondition && secondCondition)
@@ -132,6 +132,10 @@ namespace assignment8
                     if(customer.Smartphone != null)
                     {
                         Console.Write("Smartphone: {0}", customer.Smartphone.SerialNumber);
+                        if(customer.TransformModule != null)
+                        {
+                            Console.Write(" Transformator: {0}", customer.TransformModule.TransformType.ToString());
+                        }
                     }
                     else
                     {
